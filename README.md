@@ -1,8 +1,11 @@
 # solar-radiation
 Islands of Kauai, Oahu, Maui, Molokai and Hawaii
+- The inspiration for this map comes from [Solar Insolation Ranges](https://hub.arcgis.com/datasets/HiStateGIS::solar-insolation-ranges) on ArcGIS Hub.
 
-#Data
-- ```ian@debian:~/Documents/github/map675/solar-radiation/data/Solar_Insolation_Ranges$ mapshaper Solar_Insolation_Ranges.shp -info
+# Data
+ `$ mapshaper Solar_Insolation_Ranges.shp -info`
+ 
+ ```
 [info]
 Layer 1 *
 Layer name: Solar_Insolation_Ranges
@@ -27,9 +30,14 @@ Attribute data
   solar_cal   '400-450'
   sourceid    ''
   st_areasha  306.31794582565857
-  st_lengths    0```
-
+  st_lengths    0
+  ```
+  
   Using mapshaper to clean up the data and convert to GeoJSON
-  - ```ian@debian:~/Documents/github/map675/solar-radiation/data/Solar_Insolation_Ranges$ mapshaper Solar_Insolation_Ranges.shp -filter-fields deliveryda,featureuid,publishdat,solar_cal,st_areasha,st_lengths -simplify dp 20% -o format=geojson solar-ranges.json
-[simplify] Repaired 3 intersections
-[o] Wrote solar-ranges.json```
+  `$ mapshaper Solar_Insolation_Ranges.shp -filter-fields deliveryda,featureuid,publishdat,solar_cal,st_areasha,st_lengths -simplify dp 20% -o format=geojson solar-ranges.json`
+
+```
+[simplify] Repaired 3 intersections 
+[o] Wrote solar-ranges.json
+```
+

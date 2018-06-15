@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Solar Radiation in Hawaii</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href="https://api.mapbox.com/mapbox-assembly/v0.21.2/assembly.min.css" rel="stylesheet">
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin:0;
+            padding:0;
+        }
+        #map {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        bottom: 0;
+        margin: 0;
+        padding: 0;
+        background: rgba(0,0,0,0.75);
+         
+        }
+        header {
+        padding: 6px 10%;
+        font-size: 1.4em;
+        color: #00ffff;
+        /* font-family: 'Handlee', cursive; */
+        }
+        h1 {
+        position: absolute; 
+        z-index: 100;
+        top: 30px;
+        right: 50px;
+        padding: 8px 15px;
+        margin: 0;
+        color: #d4ac0d;
+        font-size: 1.5em;
+        background: rgba(25,25,25,0.8);
+        border-radius: 5px;
+    }
+ 
+    </style>
+</head>
+<body>
+    <header><h1>Solar Radiation in Hawaii</h1></header>
+ 
+    
+
+<div id='map'></div>
+
+<style>
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+</style>
+
+<script async defer src="https://api.mapbox.com/mapbox-assembly/v0.21.2/assembly.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+
+  mapboxgl.accessToken = 'pk.eyJ1IjoibWFob3JuIiwiYSI6ImNpbnV0enJ4ZTEyNG91YW0zNGF6bTlva2wifQ.7jRtxQoaV2PHlRD7fu6U-g';
+
+  var map = new mapboxgl.Map({
+      container: 'map', // container id
+      style: 'mapbox://styles/mapbox/dark-v9', // stylesheet location
+      center: [-156, 20.6], // starting position [lng, lat]
+      zoom: 6.3 // starting zoom
+  });
+
+        // when the map is done loading
+        map.on('load', function () {
+            // request our GEOJSON data
+            d3.json('data/solar-ranges.json')
+                .then(function (geojson) { // when loaded
+                    // console.log(geojson);
+                    addLayer(geojson);
+                    // addLegend(geojson);
+                    // addInteraction();
+                });
+        });
+
+        function addLayer(geojson) {
+  // add the GeoJSON data as a mapbox gl layer
+  map.addLayer({
+      'id': 'solar',
+      'type': 'fill',
+      'source': {
+          'type': 'geojson',
+          'data': geojson // use the data as the data source
+      },
+      'paint': {
+          "fill-color": "#00364e",
+          "fill-opacity": .75
+      }
+  });
+}
+</script>
+
+</body>
+</html>

@@ -40,4 +40,5 @@ Attribute data
 [simplify] Repaired 3 intersections 
 [o] Wrote solar-ranges.json
 ```
-
+### Metadata
+Metadata available for `solar-ranges.json` can be found within this [PDF](solrad.pdf "solar radiation").  Basically, the attribute `solar_cal` stands for *_estimated solar calories per square centimeter per day_*.

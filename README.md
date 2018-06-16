@@ -47,5 +47,7 @@ Metadata available for `solar-ranges.json` can be found within this [PDF](solrad
 
 `ogr2ogr -f CSV ranges.csv Solar_Insolation_Ranges/Solar_Insolation_Ranges.shp -sql "select distinct solar_cal  from Solar_Insolation_Ranges order by solar_cal"`
 
-Because this _CSV_ only has 9 distinct values, we just added a column and number 0-8 to create a numeric value with which to use with the map.
-
+Because this _CSV_ only has 9 distinct values, we just added a column and number 0-8 to create a numeric value with which to use with the map.  then to join the _CSV_ to the _solar-ranges.json_  we used the following _mapshaper_ script.
+`
+$ mapshaper solar-ranges.json -join ranges.csv keys=solar_cal,solar_cal -o force  format=geojson solar-ranges.json
+`

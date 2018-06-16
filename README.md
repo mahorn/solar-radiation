@@ -42,3 +42,10 @@ Attribute data
 ```
 ### Metadata
 Metadata available for `solar-ranges.json` can be found within this [PDF](solrad.pdf "solar radiation").  Basically, the attribute `solar_cal` stands for *_estimated solar calories per square centimeter per day_*.
+
+- wrangling data - the value *solar_cal* is a set of string ranges.
+
+`ogr2ogr -f CSV ranges.csv Solar_Insolation_Ranges/Solar_Insolation_Ranges.shp -sql "select distinct solar_cal  from Solar_Insolation_Ranges order by solar_cal"`
+
+Because this _CSV_ only has 9 distinct values, we just added a column and number 0-8 to create a numeric value with which to use with the map.
+

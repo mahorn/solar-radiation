@@ -75,7 +75,7 @@
             // request our GEOJSON data
             d3.json('data/solar-ranges.json')
                 .then(function (geojson) { // when loaded
-                    // console.log(geojson);
+                    console.log(geojson);
                     addLayer(geojson);
                     // addLegend(geojson);
                     // addInteraction();

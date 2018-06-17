@@ -51,3 +51,11 @@ Because this _CSV_ only has 9 distinct values, we just added a column and number
 `
 $ mapshaper solar-ranges.json -join ranges.csv keys=solar_cal,solar_cal -o force  format=geojson solar-ranges.json
 `
+
+# Hawaii GIS Data
+
+Several layers from these sources will be downloaded to create a vector tilesets for the basemap.
+
+- Climate [data](http://geodata.hawaii.gov/arcgis/rest/services/Climate/MapServer/) from Hawaii's geoportal.  [
+- Hawaii GIS Data](http://planning.hawaii.gov/gis/download-gis-data/)
+- [Solar Geography](http://solar.geography.hawaii.edu/)

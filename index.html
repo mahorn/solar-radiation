@@ -105,15 +105,19 @@
             
         }
 
+          
+         
+
         // when the map is done loading
         map.on('load', function () {
             // request our GEOJSON data
             d3.json('data/solar-ranges.json')
                 .then(function (geojson) { // when loaded
-                    console.log(geojson);
+                    // console.log(geojson);
                     addLayer(geojson);
                       addLegend(geojson);
                      addInteraction();
+                    //  addHighlight(geojson);
                 });
         });
 
@@ -143,29 +147,13 @@
                             9, colorCodes[9],
                             "#000000" // default for no match
                         ],
-                    "fill-opacity": 1,
+                    "fill-opacity": .8,
                   
                 }
+
+
             });
 
-            // // map will flyTo the bounds provided
-            // map.fitBounds([-129.07, 23.02, -65.74, 50.53], {
-            //         padding: {
-            //             top: 12, bottom: 18, left: 12, right: 220
-            //         }
-            //     });
-            //     var onZoomend = function () {
-            //         // set the max bounds
-            //         map.setMaxBounds(map.getBounds())
-            //         // display the legend
-            //         d3.select('#legend').classed('none', false);
-            //         // remove the listener
-            //         map.off('zoomend', onZoomend);
-            //     };
-            //     // when the map is done zooming
-            //     map.on('zoomend', onZoomend);
-            // }
-            
         }
 
         function addLegend(geojson) {
@@ -196,7 +184,9 @@
                 d3.select("#legend ul").html(listItems);
 
                 d3.select('#legend').classed('none', false);
+
             }
+
 
                     function addInteraction() {
                 // Create a popup, but don't add it to the map yet.
@@ -205,42 +195,17 @@
                     closeOnMove: false
                 });
 
-
-
-
                 map.on('mousemove', 'solar', function (e) {
                     //  console.log(e);
-                    // access to layer phz
 
-
-//  // // map will flyTo the bounds provided BIG ISLAND
-//               map.fitBounds([-156.4, 18.8, -154, 20.6], {
-//                        padding: {
-//                           top: 12, bottom: 18, left: 12, right: 220
-//                      }
-//                 });
-//                  var onZoomend = function () {
-//                      // set the max bounds
-//                     map.setMaxBounds(map.getBounds())
-//             //         // display the legend
-//             //         d3.select('#legend').classed('none', false);
-//             //         // remove the listener
-//                      map.off('zoomend', onZoomend);
-//                  };
-//             //     // when the map is done zooming
-//                 map.on('zoomend', onZoomend);
-                
-                
-
-
-
-
-                    var features = map.queryRenderedFeatures(e.point);
+                var features = map.queryRenderedFeatures(e.point);
                     // console.log(features);
                     // Change the cursor style as a UI affordance.
                     map.getCanvas().style.cursor = 'pointer';
                     // Populate the popup and set its coordinates
                     // based on the feature found.
+                  
+
                     popup.setLngLat(e.lngLat)
                         .setHTML("Radiation: " + String(e.features[0].properties.solar_cal).toLocaleString())
                         .addTo(map)
@@ -249,7 +214,44 @@
                     map.getCanvas().style.cursor = '';
                     popup.remove();
                 });
-            }
+
+                    }
+
+            
+
+
+       
+            
+
+
+             
+               
+         
+
+                
+            
+                  
+
+
+
+
+
+
+
+                    
+              
+                // // empty string for building our list items
+                // var listItems = '';
+                // // loop through all the colorCodes
+                // for (var code in colorCodes) {
+                //     listItems += "<li class='li h-full txt-m'><span class='w24 h18 mt6 fl mr12' style='background:" + colorCodes[code] + "'></span>" + labelCodes[code] + ' cal/sq.cm./day' + "</li>"
+                // }
+                // // select the legend ul element and insert the HTML list items
+                // d3.select("#legend ul").html(listItems);
+
+                // d3.select('#legend').classed('none', false);
+
+            
 
 
 

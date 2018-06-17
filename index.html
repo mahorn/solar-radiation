@@ -7,72 +7,125 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link href="https://api.mapbox.com/mapbox-assembly/v0.21.2/assembly.min.css" rel="stylesheet">
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
         }
 
-         #map {
+        #map {
             position: absolute;
             width: 100%;
             top: 0;
             bottom: 0;
             margin: 0;
             padding: 0;
-            background: rgba(0, 0, 0, 0.75);
-            color:#d4ac0d;
+            color: #A9A9A9;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-        } 
-
-         header {
+        header {
             padding: 6px 10%;
             font-size: 1.4em;
-            color: #00ffff;
-            /* font-family: 'Handlee', cursive; */
-        } 
+            color: #A9A9A9;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-          h1 {
+        h1 {
             position: absolute;
-            z-index: 100;
             top: 30px;
-            left: 50px;
+            right: 25px;
             padding: 8px 15px;
             margin: 0;
-            color: #d4ac0d;
+            color: teal;
             font-size: 1.5em;
             background: rgba(25, 25, 25, 0.8);
             border-radius: 5px;
-        }  
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        #ui-controls {
+            margin-left: 4%;
+            margin-top: 4%;
+            color: teal;
+            font-size: 1.5em;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        #ui-controls label {
+            font-size: 1em;
+            margin-right: 5px;
+        }
+
+        .map-overlay {
+            font: 18px/20px 'Montserrat', sans-serif;
+            position: absolute;
+            width: 18%;
+            left: 82%;
+            margin-top: 6%;
+            padding: 10px;
+        }
+
+        .map-overlay .map-overlay-inner {
+            background-color: rgba(0, 0, 0, 0.85);
+            color: teal;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.20);
+            border-radius: 3px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .map-overlay h2 {
+            line-height: 24px;
+            display: block;
+            margin: 0 0 10px;
+        }
+
+    </style>
+
     </style>
 </head>
 
 <body>
-    <!-- <div id='map' class='w-full h-full'></div> -->
-    <div id='map'></div> 
-                </div>
-                <div class='col col--12 h-full relative'>
-                    <div id='map' class='w-full h-full'></div>
-                    <div id='legend' class='w190 bg-gray absolute top right mt18 mr18 round shadow-darken10 px12 py12 txt-s none'>
-                        <strong class='block mb6 txt-l'>Daily Solar Insolation</strong>
-                        <ul class='ul mb6'></ul>
-                    </div>
-                </div>
-            </div>
-        
- 
-      <header>
+
+    <div id='map'></div>
+
+    <div class='col col--12 h-full relative'>
+
+        <div id='map' class='w-full h-full'></div>
+
+        <div id='legend' class='w200 bg-gray absolute left mt68 mr68 round shadow-darken10 px12 py12 txt-s none'>
+            <strong class='block mb6 txt-l'>Daily Solar Insolation</strong>
+            <ul class='ul mb6'></ul>
+        </div>
+
+    </div>
+
+    <div class='map-overlay top'>
+        <div class='map-overlay-inner'>
+            <h2>Choose an Island:</h2>
+            <!-- <label id='hawaii'></label> -->
+            <select id="islands">
+                <li><option value="Hawaii" selected>Hawaii</option></li>
+                <li><option value="Maui">Maui</option></li>
+                <option value="Molokai">Molokai</option>
+                <option value="Oahu">Oahu</option>
+                <option value="Kauia">Kauia</option>
+            </select>
+        </div>
+
+    </div>
+
+    <header>
         <h1>Solar Radiation in Hawaii</h1>
-    </header> 
-
-
-
-    
+    </header>
 
     <style>
         .mapboxgl-popup {
             max-width: 400px;
-            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            font: 14px/20px 'Montserrat', sans-serif;
+            color: #696969;
         }
     </style>
 
@@ -97,16 +150,12 @@
             2: "#00718b",
             3: "#089099",
             4: "#46aea0",
-            5: "#7ccba2",
-            6: "#b7e6a5",
-            7: "#f7feae",
-            8: "#fcde9c",
-            9: "#fcde9c",
-            
+            5: "#46aea0",
+            6: "#7ccba2",
+            7: "#b7e6a5",
+            8: "#f7feae",
+            9: "#000000",
         }
-
-          
-         
 
         // when the map is done loading
         map.on('load', function () {
@@ -115,9 +164,8 @@
                 .then(function (geojson) { // when loaded
                     // console.log(geojson);
                     addLayer(geojson);
-                      addLegend(geojson);
-                     addInteraction();
-                    //  addHighlight(geojson);
+                    addLegend(geojson);
+                    addInteraction();
                 });
         });
 
@@ -148,98 +196,98 @@
                             "#000000" // default for no match
                         ],
                     "fill-opacity": .8,
-                  
                 }
-
-
             });
-
         }
 
         function addLegend(geojson) {
-                // build it an object for associated GRIDECODES 
-                // with the Zone descriptions from the data
-                var labelCodes = {},
-                    code;
-                // loop through all the features
-                geojson.features.forEach(function (feature) {
-                    // shortcut for the code
-                    code = feature.properties.range_value;
-                  
-                    // if it's not in our labelsCodes object yet
-                    if (!labelCodes[code]) {
-                        // create it and assign the Zone description
-                        labelCodes[code] = feature.properties.solar_cal
-                    }
-
-                    
-                })
-                // empty string for building our list items
-                var listItems = '';
-                // loop through all the colorCodes
-                for (var code in colorCodes) {
-                    listItems += "<li class='li h-full txt-m'><span class='w24 h18 mt6 fl mr12' style='background:" + colorCodes[code] + "'></span>" + labelCodes[code] + ' cal/sq.cm./day' + "</li>"
+            // build it an object for associated GRIDECODES 
+            // with the Zone descriptions from the data
+            var labelCodes = {},
+                code;
+            // loop through all the features
+            geojson.features.forEach(function (feature) {
+                // shortcut for the code
+                code = feature.properties.range_value;
+                // if it's not in our labelsCodes object yet
+                if (!labelCodes[code]) {
+                    // create it and assign the Zone description
+                    labelCodes[code] = feature.properties.solar_cal
                 }
-                // select the legend ul element and insert the HTML list items
-                d3.select("#legend ul").html(listItems);
+            })
+            // empty string for building our list items
+            var listItems = '';
+            // loop through all the colorCodes
+            for (var code in colorCodes) {
+                 listItems += "<li class='li h-full txt-m'><span class='w24 h18 mt6 fl mr12' style='background:" + colorCodes[code] + "'></span>" + labelCodes[code] + ' cal/sq.cm./day' + "</li>"
+                            }
+            // select the legend ul element and insert the HTML list items
+            d3.select("#legend ul").html(listItems);
+            // add legend to map
+            d3.select('#legend').classed('none', false);
+        }
 
-                d3.select('#legend').classed('none', false);
-
-            }
-
-
-                    function addInteraction() {
-                // Create a popup, but don't add it to the map yet.
-                var popup = new mapboxgl.Popup({
-                    closeButton: false,
-                    closeOnMove: false
-                });
-
-                map.on('mousemove', 'solar', function (e) {
-                    //  console.log(e);
-
+        function addInteraction() {
+            // Create a popup, but don't add it to the map yet.
+            var popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnMove: false
+            });
+            map.on('mousemove', 'solar', function (e) {
+                //  console.log(e);
                 var features = map.queryRenderedFeatures(e.point);
-                    // console.log(features);
-                    // Change the cursor style as a UI affordance.
-                    map.getCanvas().style.cursor = 'pointer';
-                    // Populate the popup and set its coordinates
-                    // based on the feature found.
-                  
+                // console.log(features);
+                // Change the cursor style as a UI affordance.
+                map.getCanvas().style.cursor = 'pointer';
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                popup.setLngLat(e.lngLat)
+                    .setHTML("Radiation: " + String(e.features[0].properties.solar_cal).toLocaleString())
+                    .addTo(map)
+            });
+            map.on('mouseleave', 'solar', function () {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+            });
+        }
 
-                    popup.setLngLat(e.lngLat)
-                        .setHTML("Radiation: " + String(e.features[0].properties.solar_cal).toLocaleString())
-                        .addTo(map)
-                });
-                map.on('mouseleave', 'solar', function () {
-                    map.getCanvas().style.cursor = '';
-                    popup.remove();
-                });
+document.getElementById('islands').addEventListener('click', function () {
+    // Fly to a random location by offsetting the point -74.50, 40
+    // by up to 5 degrees.
+     map.flyTo({
+         center: [-150.2, -19.5],
+            zoom: 1,
+});     
+});
 
-                    }
-
-            
-
-
-       
-            
-
-
-             
-               
-         
-
-                
-            
-                  
-
-
-
+// document.getElementById('maui').addEventListener('click', function () {
+//     // Fly to a random location by offsetting the point -74.50, 40
+//     // by up to 5 degrees.
+//      map.flyTo({
+//          center: [-170, -23],
+//             zoom: 1,
+// });               
+  
+// });
 
 
 
 
-                    
-              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 // // empty string for building our list items
                 // var listItems = '';
                 // // loop through all the colorCodes
@@ -251,7 +299,7 @@
 
                 // d3.select('#legend').classed('none', false);
 
-            
+
 
 
 

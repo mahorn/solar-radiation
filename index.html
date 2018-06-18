@@ -218,7 +218,7 @@
 
         var map = new mapboxgl.Map({
             container: 'map', // container id
-            style: 'mapbox://styles/ianhorn/cjijcl8z02ghu2ss36pb2rlxb', // stylesheet location
+            style: 'mapbox://styles/mapbox/dark-v9', // stylesheet location
             center: [-156, 20.6], // starting position [lng, lat]
             zoom: 6.3 // starting zoom
         });
@@ -328,43 +328,6 @@
             });
         }
 
-<<<<<<< HEAD
-=======
-document.getElementById('islands').addEventListener('click', function () {
-    // Fly to a random location by offsetting the point -74.50, 40
-    // by up to 5 degrees.
-     map.flyTo({
-         center: [-159.7500914, 20.45075],
-            zoom: 5,
-});     
-});
-
-// document.getElementById('maui').addEventListener('click', function () {
-//     // Fly to a random location by offsetting the point -74.50, 40
-//     // by up to 5 degrees.
-//      map.flyTo({
-//          center: [-170, -23],
-//             zoom: 1,
-// });               
-  
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> 99266aed6395fc51f03a1f3ca3ee7c817416c37b
 
         document.getElementById('fitHawaii').addEventListener('click', function () {
             map.flyTo({

@@ -34,6 +34,7 @@ Attribute data
   ```
   
   Using mapshaper to clean up the data and convert to GeoJSON
+
   `$ mapshaper Solar_Insolation_Ranges.shp -filter-fields deliveryda,featureuid,publishdat,solar_cal,st_areasha,st_lengths -simplify dp 20% -o format=geojson solar-ranges.json`
 
 ```
@@ -51,3 +52,17 @@ Because this _CSV_ only has 9 distinct values, we just added a column and number
 `
 $ mapshaper solar-ranges.json -join ranges.csv keys=solar_cal,solar_cal -o force  format=geojson solar-ranges.json
 `
+
+# Hawaii GIS Data
+
+Several layers from these sources will be downloaded to create a vector tilesets for the basemap.
+
+- Climate [data](http://geodata.hawaii.gov/arcgis/rest/services/Climate/MapServer/) from Hawaii's geoportal.  [
+- Hawaii GIS Data](http://planning.hawaii.gov/gis/download-gis-data/)
+- [Solar Geography](http://solar.geography.hawaii.edu/)
+- Natural Earth [data](curl -LOk https://www.naturalearthdata.com/http//www.naturalearthdata.com/) 10m Raster
+- - processing raster:
+
+`gdal_translate -co COMPRESS=JPEG -co TILED=YES  OB_LR/OB_LR.tif ocean_floor.tif`
+
+The ocean floor raster, State Boundaries, and Country layers were added as tilesets to create a custom [style](https://api.mapbox.com/styles/v1/ianhorn/cjijcl8z02ghu2ss36pb2rlxb.html?fresh=true&title=true&access_token=pk.eyJ1IjoiaWFuaG9ybiIsImEiOiJjamgzeXBqbWIwdXhtMnFyeXNiZGFld25xIn0.s40jp67swa05iM1qKXPjYQ#2.5/24.884596/-143.371278/0) in Mapbox.

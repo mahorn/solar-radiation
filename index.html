@@ -32,26 +32,26 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-         h1 {
+        h1 {
             position: absolute;
-            top: 45px;
-            right: 135px;
-            width: 460px;
-            padding: 8px 15px;
+            top: 40px;
+            right: 55px;
+            width: 480px;
+            padding: 12px 15px;
             margin: 0;
             color: #b2dbd5;
-            font-size: 1.6em;
+            font-size: 1.7em;
             background: rgba(25, 25, 25, 0.8);
             border-radius: 5px;
             font-family: 'Montserrat', sans-serif;
-        } 
-      
+        }
+
         .map-overlay {
             font: 21px/21px 'Montserrat', sans-serif;
             position: absolute;
             width: 18%;
             right: 12%;
-            margin-top: 8%;
+            margin-top: 8.5%;
             padding: 6.5px;
         }
 
@@ -215,8 +215,9 @@
         <div class='map-overlay-text'>
             <h4>Map Authors: Maria Renee & Ian Horn</h4>
             <br>
-            <h4>Data: 
-            <a href='https://hub.arcgis.com/datasets/HiStateGIS::solar-insolation-ranges' class='link link--white' >Solar Insolation Ranges</a></h4>
+            <h4>Data:
+                <a href='https://hub.arcgis.com/datasets/HiStateGIS::solar-insolation-ranges' class='link link--white'>Solar Insolation Ranges</a>
+            </h4>
         </div>
     </div>
 
@@ -249,7 +250,7 @@
             6: "#ea9c3a",
             7: "#ecaf3c",
             8: "#edb83d",
-            9: "#000000",
+            9: "#ffffff",
         }
 
         // when the map is done loading
@@ -334,7 +335,7 @@
                 // Populate the popup and set its coordinates
                 // based on the feature found.
                 popup.setLngLat(e.lngLat)
-                    .setHTML("Solar Radiation: " + String(e.features[0].properties.solar_cal).toLocaleString() + " cal")
+                    .setHTML("Solar Insolation: " + String(e.features[0].properties.solar_cal).toLocaleString() + " cal")
                     .addTo(map)
             });
             map.on('mouseleave', 'solar', function () {

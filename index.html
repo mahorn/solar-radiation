@@ -32,11 +32,11 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        h1 {
+         h1 {
             position: absolute;
             top: 45px;
-            right: 100px;
-            width: 450px;
+            right: 135px;
+            width: 460px;
             padding: 8px 15px;
             margin: 0;
             color: #b2dbd5;
@@ -44,8 +44,8 @@
             background: rgba(25, 25, 25, 0.8);
             border-radius: 5px;
             font-family: 'Montserrat', sans-serif;
-        }
-
+        } 
+      
         .map-overlay {
             font: 21px/21px 'Montserrat', sans-serif;
             position: absolute;
@@ -164,9 +164,9 @@
         .map-overlay-authors {
             font: 12px/12px 'Montserrat', sans-serif;
             position: absolute;
-            width: 18%;
-            right: 12%;
-            margin-top: 35%;
+            width: 22%;
+            right: 4.2%;
+            margin-top: 39%;
             padding: 6.5px;
         }
 
@@ -176,10 +176,10 @@
             box-shadow: 0 1px 2px rgba(25, 25, 25, 0.8);
             border-radius: 3px;
             padding: 10px;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
         }
 
-        .map-overlay h3 {
+        .map-overlay h4 {
             line-height: 24px;
             display: block;
             margin: 0 0 10px;
@@ -213,12 +213,15 @@
 
     <div class='map-overlay-authors'>
         <div class='map-overlay-text'>
-            <h3>MAP AUTHORS: </h3>
+            <h4>Map Authors: Maria Renee & Ian Horn</h4>
+            <br>
+            <h4>Data: 
+            <a href='https://hub.arcgis.com/datasets/HiStateGIS::solar-insolation-ranges' class='link link--white' >Solar Insolation Ranges</a></h4>
         </div>
     </div>
 
     <header>
-        <h1>Solar Radiation in Hawaii</h1>
+        <h1>Solar Insolation in Hawaii</h1>
     </header>
 
     <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.21.2/assembly.js"></script>
@@ -231,8 +234,8 @@
         var map = new mapboxgl.Map({
             container: 'map', // container id
             style: 'mapbox://styles/mapbox/dark-v9', // stylesheet location
-            center: [-157, 20.6], // starting position [lng, lat]
-            zoom: 6.3 // starting zoom
+            center: [-156.50, 20.6], // starting position [lng, lat]
+            zoom: 6.4 // starting zoom
         });
 
         // object associating range value to color values
@@ -340,7 +343,6 @@
             });
         }
 
-
         document.getElementById('fitHawaii').addEventListener('click', function () {
             map.flyTo({
                 center: [-155.4828, 19.6168],
@@ -389,7 +391,7 @@
 
         document.getElementById('fitOahu').addEventListener('click', function () {
             map.flyTo({
-                center: [-157.9698, 21.4798],
+                center: [-157.9198, 21.4798],
                 zoom: 9.5,
                 bearing: 0,
                 speed: 0.4,

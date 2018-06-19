@@ -203,7 +203,7 @@
             margin-bottom: 10px;
         }
 
-        .map-overlay h3 {
+        .map-overlay h5 {
             line-height: 24px;
             display: block;
             margin: 0 0 10px;
@@ -247,9 +247,9 @@
 
     <div class='map-overlay-innertext'>
             <div class='map-overlay-innertexts'>
-                <h3>Nearly all the energy available on Earth is derived from solar radiation. That includes the energy the drives natural process, fron wind systems and the hydrological cycle to leaf photosynthesis. Knowing the amount, spatial patterns, and temporal variations in solar radiation is necessary for many scientific fields of study, including meteorology, ecology, and materials science, and for many practical purposes. These days, solar energy has become one of the most important sources of alternative energy for generating electricity and heat water. Whether it’s for rooftop photovoltaic and hot water systems or centralize solar power generation plants, knowledge of the patterns and variability of solar radiation is essential.</h3>
+                <h5>Nearly all the energy available on Earth is derived from solar radiation. That includes the energy the drives natural process, fron wind systems and the hydrological cycle to leaf photosynthesis. Knowing the amount, spatial patterns, and temporal variations in solar radiation is necessary for many scientific fields of study, including meteorology, ecology, and materials science, and for many practical purposes. These days, solar energy has become one of the most important sources of alternative energy for generating electricity and heat water. Whether it’s for rooftop photovoltaic and hot water systems or centralize solar power generation plants, knowledge of the patterns and variability of solar radiation is essential.</h5>
                 <br>
-                <h3> <a target="_blank" href="http://www.geography.hawaii.edu/">Geography Department</a> - <a target="_blank" href="http://www.manoa.hawaii.edu/">University of Hawai&#699;i at M&#257;noa<a/>-></h3>
+                <h5> <a target="_blank" href="http://www.geography.hawaii.edu/">Geography Department</a> - <a target="_blank" href="http://www.manoa.hawaii.edu/">University of Hawai&#699;i at M&#257;noa<a/>-></h3>
             </div>
         </div>
 
@@ -382,7 +382,8 @@
                 // These options control the ending camera position: centered at
                 // the target, at zoom level 8.
                 zoom: 8,
-                bearing: 0,
+                bearing: -60,
+                pitch: 30,
                 // These options control the flight curve, making it move
                 // slowly and zoom out almost completely before starting
                 // to pan.
@@ -400,7 +401,8 @@
             map.flyTo({
                 center: [-156.3828, 20.7698],
                 zoom: 9,
-                bearing: 0,
+                bearing: -40,
+                pitch: 40,
                 speed: 0.4,
                 curve: 1,
                 easing: function (t) {
@@ -413,7 +415,8 @@
             map.flyTo({
                 center: [-157.0220, 21.1698],
                 zoom: 9.6,
-                bearing: 0,
+                bearing: -20,
+                pitch: 20,
                 speed: 0.4,
                 curve: 1,
                 easing: function (t) {
@@ -424,9 +427,10 @@
 
         document.getElementById('fitOahu').addEventListener('click', function () {
             map.flyTo({
-                center: [-157.9198, 21.4798],
-                zoom: 9.5,
-                bearing: 0,
+                center: [-157.9698, 21.3798],
+                zoom: 9.3,
+                bearing: 60,
+                pitch: 10,
                 speed: 0.4,
                 curve: 1,
                 easing: function (t) {
@@ -439,7 +443,8 @@
             map.flyTo({
                 center: [-159.50, 22.0698],
                 zoom: 9.5,
-                bearing: 0,
+                bearing: -60,
+                pitch: 50,
                 speed: 0.4,
                 curve: 1,
                 easing: function (t) {

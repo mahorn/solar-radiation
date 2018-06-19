@@ -1,4 +1,4 @@
-# solar-radiation
+# [Hawaii's solar-radiation](https://mahorn.github.io/solar-radiation "Hawaii Solar Radiation") 
 Islands of Kauai, Oahu, Maui, Molokai and Hawaii
 - The inspiration for this map comes from [Solar Insolation Ranges](https://hub.arcgis.com/datasets/HiStateGIS::solar-insolation-ranges) on ArcGIS Hub.
 

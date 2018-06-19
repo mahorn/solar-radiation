@@ -184,6 +184,30 @@
             display: block;
             margin: 0 0 10px;
         }
+
+        .map-overlay-innertext {
+            font: 12px/12px 'Montserrat', sans-serif;
+            position: absolute;
+            width: 28%;
+            left: 22%;
+            margin-top: 40.5%;
+            padding: 6.5px;
+        }
+
+        .map-overlay-innertext .map-overlay-innertexts {
+            background-color: rgba(25, 25, 25, 0.8);
+            color: #b2dbd5;
+            box-shadow: 0 1px 2px rgba(25, 25, 25, 0.8);
+            border-radius: 3px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .map-overlay h3 {
+            line-height: 24px;
+            display: block;
+            margin: 0 0 10px;
+        }
     </style>
 
 </head>
@@ -192,7 +216,7 @@
     <div class='grid bg-gray-dark absolute h-full w-full'>
         <div class='col col--12 h-full relative'>
             <div id='map' class='w-full h-full'></div>
-            <div id='legend' class='w200 mx24 bg-dark absolute color-gray-light left bottom mb36 round shadow-darken10 px12 py12 txt-h8 none'>
+            <div id='legend' class='w200 mx24 my36 bg-dark absolute color-gray-light left bottom mb36 round shadow-darken10 px12 py12 txt-h8 none'>
                 <strong class='block mb6 txt-hl'>Daily Solar Insolation</strong>
                 <ul class='ul mb6 color-gray'></ul>
             </div>
@@ -221,7 +245,13 @@
         </div>
     </div>
 
-
+    <div class='map-overlay-innertext'>
+            <div class='map-overlay-innertexts'>
+                <h3>This map is based on .................................</h3>
+                <br>
+                <h3>si necesitas otro parrafo</h3>
+            </div>
+        </div>
 
     <header>
         <h1>Solar Insolation in Hawaii</h1>

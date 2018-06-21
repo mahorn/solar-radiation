@@ -51,15 +51,16 @@
     <div class='absolute z2 right mt36 mr36'>
       <h1 class='txt-h3 inline-block'>Solar Insolation in Hawaii</h1>
       <div class='txt-m color-white absolute right inline-block z2 mt36'>
-        <button class='btn block py6 px12 round mb12 w120 align-center' id='fitHawaii'>HAWAII</button>
-        <button class='btn block py6 px12 round mb12 w120 align-center' id='fitMaui'>MAUI</button>
-        <button class='btn block py6 px12 round mb12 w120 align-center' id='fitMolokai'>MOLOKAI</button>
-        <button class='btn block py6 px12 round mb12 w120 align-center' id='fitOahu'>OAHU</button>
-        <button class='btn block py6 px12 round mb12 w120 align-center' id='fitKauai'>KAUAI</button>
+        <button class='btn btn-nav block py6 px12 round mb12 w120 align-center' id='fitHawaii'>HAWAII</button>
+        <button class='btn btn-nav block py6 px12 round mb12 w120 align-center' id='fitMaui'>MAUI</button>
+        <button class='btn btn-nav block py6 px12 round mb12 w120 align-center' id='fitMolokai'>MOLOKAI</button>
+        <button class='btn btn-nav block py6 px12 round mb12 w120 align-center' id='fitOahu'>OAHU</button>
+        <button class='btn btn-nav block py6 px12 round mb12 w120 align-center' id='fitKauai'>KAUAI</button>
       </div>
     </div>
     <div id='legend' class='w200 absolute bottom left ml36 mb36 color-white z2 border border--gray-dark bg-dark bg-gray-dark round px12 py12'>
-      <div class='inline-block mb6 txt-l txt-normal'>Daily Solar Insolation<br>cal/sq.cm per day</div>
+      <div class='inline-block mb6 txt-l txt-normal'>Daily Solar Insolation
+        <br>cal/sq.cm per day</div>
       <ul class='ul mb6 color-whtie txt-xs'></ul>
     </div>
     <div class='absolute right bottom mr12 mb30 color-white z2 align-r'>
@@ -240,6 +241,14 @@
           return t;
         }
       });
+
+      var currentSelected = document.querySelector('.selected');
+
+      if (currentSelected) {
+        currentSelected.classList.remove('selected');
+      }
+
+      this.classList.add('selected');
     });
 
     document.getElementById('fitMaui').addEventListener('click', function () {
@@ -254,6 +263,13 @@
           return t;
         }
       });
+      var currentSelected = document.querySelector('.selected');
+
+      if (currentSelected) {
+        currentSelected.classList.remove('selected');
+      }
+
+      this.classList.add('selected');
     });
 
     document.getElementById('fitMolokai').addEventListener('click', function () {
@@ -268,6 +284,13 @@
           return t;
         }
       });
+      var currentSelected = document.querySelector('.selected');
+
+      if (currentSelected) {
+        currentSelected.classList.remove('selected');
+      }
+
+      this.classList.add('selected');
     });
 
     document.getElementById('fitOahu').addEventListener('click', function () {
@@ -282,6 +305,13 @@
           return t;
         }
       });
+      var currentSelected = document.querySelector('.selected');
+
+      if (currentSelected) {
+        currentSelected.classList.remove('selected');
+      }
+
+      this.classList.add('selected');
     });
 
     document.getElementById('fitKauai').addEventListener('click', function () {
@@ -296,6 +326,13 @@
           return t;
         }
       });
+      var currentSelected = document.querySelector('.selected');
+
+      if (currentSelected) {
+        currentSelected.classList.remove('selected');
+      }
+
+      this.classList.add('selected');
     });
 
     function addAboutModalUI() {

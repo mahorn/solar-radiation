@@ -2,355 +2,398 @@
 <html>
 
 <head>
-  <meta charset='utf-8' />
-  <title>Solar Radiation in Hawaii</title>
-  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-  <link href="https://api.mapbox.com/mapbox-assembly/v0.21.2/assembly.min.css" rel="stylesheet">
-  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', sans-serif;
-    }
+    <meta charset='utf-8' />
+    <title>Solar Radiation in Hawaii</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href="https://api.mapbox.com/mapbox-assembly/v0.21.2/assembly.min.css" rel="stylesheet">
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.css' rel='stylesheet' />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-    h1 {
-      color: #b2dbd5;
+        h1 {
+            color: #b2dbd5;
+        }
 
-    }
+        .btn {
+            background: #2b616d;
+        }
 
-    .btn {
-      background: #2b616d;
-    }
+        .btn:hover,
+        .btn.selected {
+            background: #b2dbd5;
+            -webkit-text-fill-color: #2b616d;
+        }
 
-    .btn:hover,
-    .btn.selected {
-      background: #3e8c9d;
-    }
+        #about-trigger.btn {
+            padding: 0;
+        }
 
-    #about-trigger.btn {
-      padding: 0;
-    }
+        #about-global.btn {
+            padding: 0;
+        }
 
-    #about-modal {
-      background: rgba(48, 48, 48, 0.50);
-    }
+        #about-modal {
+            background: rgba(48, 48, 48, 0.50);
+            -webkit-text-fill-color: #b2dbd5;
+        }
 
-    .mapboxgl-popup {
-      max-width: 400px;
-      font: 14px/20px 'Montserrat', sans-serif;
-      color: #2b616d;
-    }
-  </style>
+        .mapboxgl-popup {
+            max-width: 400px;
+            font: 14px/20px 'Montserrat', sans-serif;
+            color: #2b616d;
+        }
+    </style>
 
 </head>
 
 <body>
-  <div id='map' class='absolute h-full w-full z1'>
-    <div class='absolute z2 right mt36 mr36'>
-      <h1 class='txt-h3 inline-block'>Solar Insolation in Hawaii</h1>
-      <div class='txt-m color-white absolute right inline-block z2 mt36'>
-        <button class='btn btn-nav block py6 px12 round mb12 w120 align-center' id='fitHawaii'>HAWAII</button>
-        <button class='btn btn-nav block py6 px12 round mb12 w120 align-center' id='fitMaui'>MAUI</button>
-        <button class='btn btn-nav block py6 px12 round mb12 w120 align-center' id='fitMolokai'>MOLOKAI</button>
-        <button class='btn btn-nav block py6 px12 round mb12 w120 align-center' id='fitOahu'>OAHU</button>
-        <button class='btn btn-nav block py6 px12 round mb12 w120 align-center' id='fitKauai'>KAUAI</button>
-      </div>
-    </div>
-    <div id='legend' class='w200 absolute bottom left ml36 mb36 color-white z2 border border--gray-dark bg-dark bg-gray-dark round px12 py12'>
-      <div class='inline-block mb6 txt-l txt-normal'>Daily Solar Insolation
-        <br>cal/sq.cm per day</div>
-      <ul class='ul mb6 color-whtie txt-xs'></ul>
-    </div>
-    <div class='absolute right bottom mr12 mb30 color-white z2 align-r'>
-      <button id='about-trigger' class='btn'>
-        <svg class='icon link color-lighten50 txt-xl'>
-          <use xlink:href='#icon-question'></use>
-        </svg>
-      </button>
-      <div class='txt-m'>Map Authors: Maria Renee &amp; Ian Horn</div>
-      <div class='txt-m'>Data:
-        <a class='link' href='https://hub.arcgis.com/datasets/HiStateGIS::solar-insolation-ranges' class='link link--white'>Solar Insolation Ranges</a>
-      </div>
-    </div>
-  </div>
-  <!-- end map -->
 
-  <div id='about-modal' class='absolute top right bottom left scroll-auto z3 none animation--speed-1'>
-    <div class='flex-child border border-gray-dark bg-gray-dark color-white round relative w600 mx-auto mt120'>
-      <button id='modal-close' class='btn absolute top right mr6 mt6 px0 py0'>
-        <svg class='icon link color-lighten50 txt-xl'>
-          <use xlink:href='#icon-close'></use>
-        </svg>
-      </button>
-      <div class='px24 py24'>
-        <div class='txt-l mb12'>About this map</div>
-        <div class='txt-m'>
-          Nearly all the energy available on Earth is derived from solar radiation. These days, solar energy has become one of the
-          most important sources of alternative energy for generating electricity and heat water. Whether it’s for rooftop
-          photovoltaic and hot water systems or centralize solar power generation plants, knowledge of the patterns and variability
-          of solar radiation is essential.
-          <h4>
-            <a target="_blank" href="http://www.geography.hawaii.edu/">Geography Department</a> -
-            <a target="_blank" href="http://www.manoa.hawaii.edu/">University of Hawai&#699;i at M&#257;noa
-              <a/>
-          </h4>
+    <div id='map' class='absolute h-full w-full z1'>
+        <div class='absolute z2 right mt36 mr36'>
+            <h1 class='txt-h3 inline-block bg-darken75 round px12 py12'>Solar Insolation in Hawaii</h1>
+            <div class='txt-s color-orange absolute right inline-block z2 mt60 py24'>
+                <button class='btn btn-nav block py6 px12 round mb12 w120 align-center color-green-faint' id='fitHawaii'>HAWAII</button>
+                <button class='btn btn-nav block py6 px12 round mb12 w120 align-center color-green-faint' id='fitMaui'>MAUI</button>
+                <button class='btn btn-nav block py6 px12 round mb12 w120 align-center color-green-faint' id='fitMolokai'>MOLOKAI</button>
+                <button class='btn btn-nav block py6 px12 round mb12 w120 align-center color-green-faint' id='fitOahu'>OAHU</button>
+                <button class='btn btn-nav block py6 px12 round mb12 w120 align-center color-green-faint' id='fitKauai'>KAUAI</button>
+            </div>
         </div>
-      </div>
+        <div class='absolute left top mr12 mb12 color-green-faint z2 round px24 py24 align-l'>
+            <button id='about-icon' class='btn'>
+                <svg class='icon link color-lighten50 txt-l'>
+                    <use xlink:href='#icon-refresh'></use>
+                </svg>
+            </button>
+        </div>
+        <div id='legend' class='w200 absolute bottom left ml24 mb24 color-green-faint z2 bg-darken75 round px12 py12'>
+
+            <div class='inline-block mb6 txt-m align-center mx24'>Daily Solar Insolation
+                <br>(cal/sq.cm per day)</div>
+            <ul class='ul mb6 color-green-faint txt-xs mx24 align-l py12'></ul>
+        </div>
+        <div class='absolute right bottom mr24 mb60 color-green-faint z2 align-r'>
+            <button id='about-trigger' class='btn'>
+                <svg class='icon link color-lighten50 txt-xl'>
+                    <use xlink:href='#icon-question'></use>
+                </svg>
+            </button>
+            <div class='txt-s'>Map Authors: Maria Renee &amp; Ian Horn</div>
+            <div class='txt-s'>Data:
+                <a class='link' href='https://hub.arcgis.com/datasets/HiStateGIS::solar-insolation-ranges' class='link link--white'>Solar Insolation Ranges</a>
+            </div>
+        </div>
     </div>
-  </div>
-  <!-- end modal -->
 
-  <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.21.2/assembly.js"></script>
-  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script>
-    mapboxgl.accessToken =
-      'pk.eyJ1IjoiaWFuaG9ybiIsImEiOiJjamlqbmxybDAxaXFsM3FvZDlxcThhajljIn0.VpXYQt8YSIkAQIHs-savuQ';
+    <!-- end map -->
 
-    var map = new mapboxgl.Map({
-      container: 'map', // container id
-      style: 'mapbox://styles/mapbox/dark-v9', // stylesheet location
-      center: [-157.50, 20.5], // starting position [lng, lat]
-      zoom: 6.6 // starting zoom
-    });
+    <div id='about-modal' class='absolute top right bottom left scroll-auto z3 none animation--speed-1'>
+        <div class='flex-child border border-gray-dark bg-gray-dark color-white round relative w600 mx-auto mt120'>
+            <button id='modal-close' class='btn absolute top right mr6 mt6 px0 py0'>
+                <svg class='icon link color-lighten50 txt-xl'>
+                    <use xlink:href='#icon-close'></use>
+                </svg>
+            </button>
+            <div class='px24 py24'>
+                <div class='txt-l mb12'>About this map</div>
+                <div class='txt-m'>
+                    Nearly all the energy available on Earth is derived from solar radiation. These days, solar energy has become one of the
+                    most important sources of alternative energy for generating electricity and heat water. Whether it’s
+                    for rooftop photovoltaic and hot water systems or centralize solar power generation plants, knowledge
+                    of the patterns and variability of solar radiation is essential.
+                    <h4>
+                        <a target="_blank" href="http://www.geography.hawaii.edu/">Geography Department</a> -
+                        <a target="_blank" href="http://www.manoa.hawaii.edu/">University of Hawai&#699;i at M&#257;noa
+                            <a/>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    // object associating range value to color values
-    var colorCodes = {
-      0: "#edb83d",
-      1: "#ecaf3c",
-      2: "#ea9c3a",
-      3: "#e88a37",
-      4: "#e36533",
-      5: "#e57835",
-      6: "#e25c32",
-      7: "#df402e",
-      8: "#d70026"
-    }
+    <!-- end modal -->
 
-    // when the map is done loading
-    map.on('load', function () {
-      // request our GEOJSON data
-      d3.json('data/solar-ranges.json')
-        .then(function (geojson) { // when loaded
-          addLayer(geojson);
-          addLegend(geojson);
-          addInteraction();
-          addAboutModalUI();
+    <script async defer src="https://api.mapbox.com/mapbox-assembly/v0.21.2/assembly.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.45.0/mapbox-gl.js'></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiaWFuaG9ybiIsImEiOiJjamlqbmxybDAxaXFsM3FvZDlxcThhajljIn0.VpXYQt8YSIkAQIHs-savuQ';
+
+        var map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: 'mapbox://styles/mapbox/dark-v9', // stylesheet location
+            center: [-157.0, 20.5], // starting position [lng, lat]
+            zoom: 6.6 // starting zoom
         });
-    });
 
-    function addLayer(geojson) {
-      // add the GeoJSON data as a mapbox gl layer
-      map.addLayer({
-        'id': 'solar',
-        'type': 'fill',
-        'source': {
-          'type': 'geojson',
-          'data': geojson // use the data as the data source
-        },
-        'paint': {
-          "fill-color": [
-            "match", // match the numbers below to the range value
-            ["number", ["get", "range_value"]],
-            0, colorCodes[0],
-            1, colorCodes[1],
-            2, colorCodes[2],
-            3, colorCodes[3],
-            4, colorCodes[4],
-            5, colorCodes[5],
-            6, colorCodes[6],
-            7, colorCodes[7],
-            8, colorCodes[8],
-            "#000000" // default for no match
-          ],
-          "fill-opacity": .8,
+        // object associating range value to color values
+        var colorCodes = {
+            0: "#edb83d",
+            1: "#ecaf3c",
+            2: "#ea9c3a",
+            3: "#e88a37",
+            4: "#e36533",
+            5: "#e57835",
+            6: "#e25c32",
+            7: "#df402e",
+            8: "#d70026"
         }
-      });
-    }
 
-    function addLegend(geojson) {
-      // build it an object for associated range value  
-      // with the solar cal descriptions from the data
-      var labelCodes = {},
-        code;
-      // loop through all the features
-      geojson.features.forEach(function (feature) {
-        // shortcut for the code
-        code = feature.properties.range_value;
+        // when the map is done loading
+        map.on('load', function () {
+            // request our GEOJSON data
+            d3.json('data/solar-ranges.json')
+                .then(function (geojson) { // when loaded
+                    addLayer(geojson);
+                    addLegend(geojson);
+                    addInteraction();
+                    addAboutModalUI();
+                });
+        });
 
-        // if it's not in our labelsCodes object yet
-        if (!labelCodes[code]) {
-          // create it and assign the solar cal description
-          labelCodes[code] = feature.properties.solar_cal
+        function addLayer(geojson) {
+            // add the GeoJSON data as a mapbox gl layer
+            map.addLayer({
+                'id': 'solar',
+                'type': 'fill',
+                'source': {
+                    'type': 'geojson',
+                    'data': geojson // use the data as the data source
+                },
+                'paint': {
+                    "fill-color": [
+                        "match", // match the numbers below to the range value
+                        ["number", ["get", "range_value"]],
+                        0, colorCodes[0],
+                        1, colorCodes[1],
+                        2, colorCodes[2],
+                        3, colorCodes[3],
+                        4, colorCodes[4],
+                        5, colorCodes[5],
+                        6, colorCodes[6],
+                        7, colorCodes[7],
+                        8, colorCodes[8],
+                        "#000000" // default for no match
+                    ],
+                    "fill-opacity": .8,
+                }
+            });
         }
-      })
-      // empty string for building our list items
-      var listItems = '';
-      // loop through all the colorCodes
-      for (var code in colorCodes) {
-        listItems += "<li class='li h-full txt-m'><span class='w24 h18 fl mr12' style='background:" +
-          colorCodes[code] + "'></span>" + labelCodes[code] + "</li>"
-      }
-      // select the legend ul element and insert the HTML list items
-      d3.select("#legend ul").html(listItems);
-      // add legend to map
-      d3.select('#legend').classed('none', false);
-    }
 
-    function addInteraction() {
-      // Create a popup, but don't add it to the map yet.
-      var popup = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnMove: false
-      });
-      map.on('mousemove', 'solar', function (e) {
-        var features = map.queryRenderedFeatures(e.point);
-        // Change the cursor style as a UI affordance.
-        map.getCanvas().style.cursor = 'pointer';
-        // Populate the popup and set its coordinates
-        // based on the feature found.
-        popup.setLngLat(e.lngLat)
-          .setHTML("Solar Insolation: " + String(e.features[0].properties.solar_cal).toLocaleString() +
-            " cal")
-          .addTo(map)
-      });
-      map.on('mouseleave', 'solar', function () {
-        map.getCanvas().style.cursor = '';
-        popup.remove();
-      });
-    }
+        function addLegend(geojson) {
+            // build it an object for associated range value  
+            // with the solar cal descriptions from the data
+            var labelCodes = {},
+                code;
+            // loop through all the features
+            geojson.features.forEach(function (feature) {
+                // shortcut for the code
+                code = feature.properties.range_value;
 
-    document.getElementById('fitHawaii').addEventListener('click', function () {
-      map.flyTo({
-        center: [-155.1498, 19.5268],
-        // These options control the ending camera position: centered at
-        // the target, at zoom level 8.
-        zoom: 8,
-        bearing: -60,
-        pitch: 30,
-        // These options control the flight curve, making it move
-        // slowly and zoom out almost completely before starting
-        // to pan.
-        speed: 0.4, // make the flying slow
-        curve: 1, // change the speed at which it zooms out
-        // This can be any easing function: it takes a number between
-        // 0 and 1 and returns another number between 0 and 1.
-        easing: function (t) {
-          return t;
+                // if it's not in our labelsCodes object yet
+                if (!labelCodes[code]) {
+                    // create it and assign the solar cal description
+                    labelCodes[code] = feature.properties.solar_cal
+                }
+            })
+            // empty string for building our list items
+            var listItems = '';
+            // loop through all the colorCodes
+            for (var code in colorCodes) {
+                listItems += "<li class='li h-full txt-m'><span class='w24 h18 fl mr12' style='background:" +
+                    colorCodes[code] + "'></span>" + labelCodes[code] + "</li>"
+            }
+            // select the legend ul element and insert the HTML list items
+            d3.select("#legend ul").html(listItems);
+            // add legend to map
+            d3.select('#legend').classed('none', false);
         }
-      });
 
-      var currentSelected = document.querySelector('.selected');
-
-      if (currentSelected) {
-        currentSelected.classList.remove('selected');
-      }
-
-      this.classList.add('selected');
-    });
-
-    document.getElementById('fitMaui').addEventListener('click', function () {
-      map.flyTo({
-        center: [-156.3828, 20.7698],
-        zoom: 9,
-        bearing: -30,
-        pitch: 50,
-        speed: 0.4,
-        curve: 1,
-        easing: function (t) {
-          return t;
+        function addInteraction() {
+            // Create a popup, but don't add it to the map yet.
+            var popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnMove: false
+            });
+            map.on('mousemove', 'solar', function (e) {
+                var features = map.queryRenderedFeatures(e.point);
+                // Change the cursor style as a UI affordance.
+                map.getCanvas().style.cursor = 'pointer';
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                popup.setLngLat(e.lngLat)
+                    .setHTML("Solar Insolation: " + String(e.features[0].properties.solar_cal).toLocaleString() +
+                        " cal")
+                    .addTo(map)
+            });
+            map.on('mouseleave', 'solar', function () {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+            });
         }
-      });
-      var currentSelected = document.querySelector('.selected');
 
-      if (currentSelected) {
-        currentSelected.classList.remove('selected');
-      }
+        document.getElementById('fitHawaii').addEventListener('click', function () {
+            map.flyTo({
+                center: [-155.4998, 19.6268],
+                // These options control the ending camera position: centered at
+                // the target, at zoom level 8.
+                zoom: 8,
+                bearing: -60,
+                pitch: 30,
+                // These options control the flight curve, making it move
+                // slowly and zoom out almost completely before starting
+                // to pan.
+                speed: 0.4, // make the flying slow
+                curve: 1, // change the speed at which it zooms out
+                // This can be any easing function: it takes a number between
+                // 0 and 1 and returns another number between 0 and 1.
+                easing: function (t) {
+                    return t;
+                }
+            });
 
-      this.classList.add('selected');
-    });
+            var currentSelected = document.querySelector('.selected');
 
-    document.getElementById('fitMolokai').addEventListener('click', function () {
-      map.flyTo({
-        center: [-157.0220, 21.1111],
-        zoom: 9.6,
-        bearing: -20,
-        pitch: 20,
-        speed: 0.4,
-        curve: 1,
-        easing: function (t) {
-          return t;
+            if (currentSelected) {
+                currentSelected.classList.remove('selected');
+            }
+
+            this.classList.add('selected');
+        });
+
+        document.getElementById('fitMaui').addEventListener('click', function () {
+            map.flyTo({
+                center: [-156.3828, 20.7698],
+                zoom: 9.2,
+                bearing: -30,
+                pitch: 50,
+                speed: 0.4,
+                curve: 1,
+                easing: function (t) {
+                    return t;
+                }
+            });
+
+            var currentSelected = document.querySelector('.selected');
+
+            if (currentSelected) {
+                currentSelected.classList.remove('selected');
+            }
+
+            this.classList.add('selected');
+        });
+
+        document.getElementById('fitMolokai').addEventListener('click', function () {
+            map.flyTo({
+                center: [-157.0220, 21.1111],
+                zoom: 9.6,
+                bearing: -20,
+                pitch: 20,
+                speed: 0.4,
+                curve: 1,
+                easing: function (t) {
+                    return t;
+                }
+            });
+            var currentSelected = document.querySelector('.selected');
+
+            if (currentSelected) {
+                currentSelected.classList.remove('selected');
+            }
+
+            this.classList.add('selected');
+        });
+
+        document.getElementById('fitOahu').addEventListener('click', function () {
+            map.flyTo({
+                center: [-157.9899, 21.4798],
+                zoom: 9.3,
+                bearing: 60,
+                pitch: 10,
+                speed: 0.4,
+                curve: 1,
+                easing: function (t) {
+                    return t;
+                }
+            });
+            var currentSelected = document.querySelector('.selected');
+
+            if (currentSelected) {
+                currentSelected.classList.remove('selected');
+            }
+
+            this.classList.add('selected');
+        });
+
+        document.getElementById('fitKauai').addEventListener('click', function () {
+            map.flyTo({
+                center: [-159.48, 22.0698],
+                zoom: 9.7,
+                bearing: -60,
+                pitch: 40,
+                speed: 0.4,
+                curve: 1,
+                easing: function (t) {
+                    return t;
+                }
+            });
+
+            var currentSelected = document.querySelector('.selected');
+
+            if (currentSelected) {
+                currentSelected.classList.remove('selected');
+            }
+
+            this.classList.add('selected');
+
+        });
+
+        document.getElementById('about-icon').addEventListener('click', function () {
+            map.flyTo({
+                center: [-157.0, 20.5],
+                zoom: 6.6,
+                bearing: 0,
+                pitch: 0,
+                speed: 0.4,
+                curve: 2,
+                easing: function (t) {
+                    return t;
+                }
+            });
+
+            var currentSelected = document.querySelector('.selected');
+
+            if (currentSelected) {
+                currentSelected.classList.remove('selected');
+            }
+
+            this.classList.add('selected');
+
+        });
+
+        function addAboutModalUI() {
+
+            var trigger = document.getElementById('about-trigger'),
+
+                modal = document.getElementById('about-modal'),
+                close = document.getElementById('modal-close');
+
+            trigger.addEventListener('click', function () {
+                modal.classList.remove('none');
+            });
+
+            close.addEventListener('click', function () {
+                modal.classList.add('none');
+            });
+
         }
-      });
-      var currentSelected = document.querySelector('.selected');
-
-      if (currentSelected) {
-        currentSelected.classList.remove('selected');
-      }
-
-      this.classList.add('selected');
-    });
-
-    document.getElementById('fitOahu').addEventListener('click', function () {
-      map.flyTo({
-        center: [-157.9818, 21.3798],
-        zoom: 9.3,
-        bearing: 60,
-        pitch: 10,
-        speed: 0.4,
-        curve: 1,
-        easing: function (t) {
-          return t;
-        }
-      });
-      var currentSelected = document.querySelector('.selected');
-
-      if (currentSelected) {
-        currentSelected.classList.remove('selected');
-      }
-
-      this.classList.add('selected');
-    });
-
-    document.getElementById('fitKauai').addEventListener('click', function () {
-      map.flyTo({
-        center: [-159.40, 22.0698],
-        zoom: 9.5,
-        bearing: -60,
-        pitch: 40,
-        speed: 0.4,
-        curve: 1,
-        easing: function (t) {
-          return t;
-        }
-      });
-      var currentSelected = document.querySelector('.selected');
-
-      if (currentSelected) {
-        currentSelected.classList.remove('selected');
-      }
-
-      this.classList.add('selected');
-    });
-
-    function addAboutModalUI() {
-
-      var trigger = document.getElementById('about-trigger'),
-        modal = document.getElementById('about-modal'),
-        close = document.getElementById('modal-close');
-
-      trigger.addEventListener('click', function () {
-        modal.classList.remove('none');
-      });
-
-      close.addEventListener('click', function () {
-        modal.classList.add('none');
-      });
-
-    }
-  </script>
+    </script>
 
 </body>
 
